@@ -1,7 +1,5 @@
 import cucumber.api.CucumberOptions;
-import cucumber.api.java.After;
 import cucumber.api.junit.Cucumber;
-import helpers.World;
 import org.junit.runner.RunWith;
 
 /**
@@ -17,7 +15,7 @@ import org.junit.runner.RunWith;
 		"html:target/cucumber"
 	},
 	glue = {
-		"steps"
+			"classpath:steps"
 	},
 	features = {
 		"classpath:features"
@@ -25,9 +23,4 @@ import org.junit.runner.RunWith;
 )
 public class TestRunner {
 
-	@After
-	public void tearDown () {
-
-		World.reset();
-	}
 }

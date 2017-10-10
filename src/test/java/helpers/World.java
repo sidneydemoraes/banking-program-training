@@ -1,7 +1,7 @@
 package helpers;
 
+import br.smc.banking.model.Account;
 import br.smc.banking.model.AccountType;
-import br.smc.banking.model.RegularAccount;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +16,10 @@ public class World {
 	private AccountType accountType;
 
 	@Getter @Setter
-	private RegularAccount regularAccount;
+	private Account regularAccount;
+
+	@Getter
+	@Setter
+	private String thrownException;
 
 }

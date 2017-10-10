@@ -1,9 +1,8 @@
 package steps;
 
+import br.smc.banking.model.Account;
 import br.smc.banking.model.AccountType;
 import br.smc.banking.model.Owner;
-import br.smc.banking.model.RegularAccount;
-import br.smc.banking.model.factory.AccountFactory;
 import cucumber.api.java8.En;
 import helpers.DummyObjectsFactory;
 import helpers.World;
@@ -23,16 +22,17 @@ public class GivenSteps implements En {
 
 		this.world = world;
 
-		Given("I have a \"(\\s+)\" account", (String type) -> {
+		Given("^I have a (\\w+) account$", (String type) -> {
 			world.setAccountType(AccountType.convertFromString(type));
 		});
 
 
-		Given("my account has a balance of $([\\d\\.])+", (String amount) -> {
+		Given("^my account has a balance of \\$([\\d^\\.]+)$", (String amount) -> {
 
 			Owner dummyOwner = DummyObjectsFactory.getDummyOwner();
 			BigDecimal balance = new BigDecimal(amount);
-			RegularAccount account = AccountFactory.getRegularAccount(dummyOwner, balance);
+			Account account = new Account(dummyOwner);
+			account.deposit(balance);
 			world.setRegularAccount(account);
 		});
 
