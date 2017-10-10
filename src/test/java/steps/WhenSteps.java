@@ -32,5 +32,11 @@ public class WhenSteps implements En {
 				world.setThrownException(e.getClass().getSimpleName());
 			}
 		});
+
+		When("^the interests are applied$", () -> {
+			world.getSavingsAccount().applyInterest(
+					world.getInterest()
+			);
+		});
 	}
 }

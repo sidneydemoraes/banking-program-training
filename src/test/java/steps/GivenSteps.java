@@ -59,11 +59,18 @@ public class GivenSteps implements En {
 
 		});
 
-
 		Given("^my account has a loan limit of \\$([\\d\\.]+)$", (String amount) -> {
 			BigDecimal limit = new BigDecimal(amount);
 			world.getCheckingAccount().setLoanLimit(limit);
 		});
+
+		Given("^interests are set to (\\d+)%$", (BigDecimal value) -> {
+
+			int decimalPlaces = 2;
+			BigDecimal interest = BigDecimal.ONE.add(value.divide(new BigDecimal(100), decimalPlaces, BigDecimal.ROUND_HALF_UP));
+			world.setInterest(interest);
+		});
+
 
 	}
 

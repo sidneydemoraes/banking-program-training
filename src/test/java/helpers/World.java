@@ -7,6 +7,8 @@ import br.smc.banking.model.SavingsAccount;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /**
  * A helper object created to hold other objects that will be used by tests throughout steps.
  *
@@ -29,6 +31,10 @@ public class World {
 	@Getter
 	@Setter
 	private String thrownException;
+
+	@Getter
+	@Setter
+	private BigDecimal interest;
 
 
 	public void setCheckingAccount(CheckingAccount account) {

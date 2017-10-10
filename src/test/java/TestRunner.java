@@ -14,6 +14,9 @@ import org.junit.runner.RunWith;
 		"pretty",
 		"html:target/cucumber"
 	},
+		tags = {
+				"~@ignore"
+		},
 	glue = {
 			"classpath:steps"
 	},
