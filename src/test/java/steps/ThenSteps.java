@@ -20,9 +20,12 @@ public class ThenSteps implements En {
 
 		this.world = world;
 
-		Then("^my account balance is shown as \\$([\\d\\.]+)$", (String amount) -> {
+		Then("^my account balance is shown as \\$(-?)([\\d\\.]+)$", (String minusSignal, String amount) -> {
 
+			boolean isNegativeBalance = "-".equals(minusSignal);
 			BigDecimal expectedBalance = new BigDecimal(amount);
+			if (isNegativeBalance)
+				expectedBalance = expectedBalance.negate();
 			assertEquals(expectedBalance, world.getRegularAccount().getBalance());
 		});
 
@@ -31,5 +34,6 @@ public class ThenSteps implements En {
 			String expectedExceptionName = error.replace(" ", "") + "Exception";
 			assertEquals(expectedExceptionName, world.getThrownException());
 		});
+
 	}
 }

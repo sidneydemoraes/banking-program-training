@@ -1,8 +1,6 @@
 package steps;
 
-import br.smc.banking.model.Account;
-import br.smc.banking.model.AccountType;
-import br.smc.banking.model.Owner;
+import br.smc.banking.model.*;
 import cucumber.api.java8.En;
 import helpers.DummyObjectsFactory;
 import helpers.World;
@@ -31,9 +29,40 @@ public class GivenSteps implements En {
 
 			Owner dummyOwner = DummyObjectsFactory.getDummyOwner();
 			BigDecimal balance = new BigDecimal(amount);
-			Account account = new Account(dummyOwner);
-			account.deposit(balance);
-			world.setRegularAccount(account);
+			AccountType accountType = world.getAccountType();
+			Class accountClass;
+			try {
+				accountClass = Class.forName(accountType.getAccountClassName());
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+
+			switch (accountType) {
+				case REGULAR:
+					Account account = new Account(dummyOwner);
+					account.deposit(balance);
+					world.setRegularAccount(account);
+					break;
+				case CHECKING:
+					CheckingAccount checkingAccount = new CheckingAccount(dummyOwner);
+					checkingAccount.deposit(balance);
+					world.setCheckingAccount(checkingAccount);
+					break;
+				case SAVINGS:
+					SavingsAccount savingsAccount = new SavingsAccount(dummyOwner);
+					savingsAccount.deposit(balance);
+					world.setSavingsAccount(savingsAccount);
+					break;
+				default:
+					throw new RuntimeException();
+			}
+
+		});
+
+
+		Given("^my account has a loan limit of \\$([\\d\\.]+)$", (String amount) -> {
+			BigDecimal limit = new BigDecimal(amount);
+			world.getCheckingAccount().setLoanLimit(limit);
 		});
 
 	}

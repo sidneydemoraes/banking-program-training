@@ -1,16 +1,22 @@
 package br.smc.banking.model;
 
 import br.smc.banking.exception.InsuficientFundsException;
+import lombok.Getter;
 import lombok.NonNull;
 
 import java.math.BigDecimal;
 
 /**
- * Bean representing a Regular Banking Account.
+ * Abstract class that represents the basic structure of a baking account.
  *
- * Created by Sidney de Moraes.
+ * Created by Sidney de Moraes
  */
-public class Account extends BaseAccount {
+public class Account {
+
+	protected Owner owner;
+
+	@Getter
+	protected BigDecimal balance;
 
 	/**
 	 * A non-null {@link Owner} must be provided in order to construct a Regular Account.
@@ -57,6 +63,4 @@ public class Account extends BaseAccount {
 		this.balance = this.balance.subtract(amount);
 		return this.balance;
 	}
-
-
 }

@@ -7,8 +7,13 @@ package br.smc.banking.model;
  */
 public enum AccountType {
 
-	CHECKING, REGULAR, SAVINGS;
+	CHECKING("CheckingAccount"),
+	REGULAR("Account"),
+	SAVINGS("SavingsAccount");
 
+
+	private final String accountClassName;
+	private final String packageName = "br.smc.banking.model.";
 
 	public static AccountType convertFromString(String type) {
 
@@ -23,6 +28,15 @@ public enum AccountType {
 			default:
 				return REGULAR;
 		}
+	}
+
+
+	private AccountType(String className) {
+		this.accountClassName = className;
+	}
+
+	public String getAccountClassName() {
+		return this.packageName + this.accountClassName;
 	}
 
 }

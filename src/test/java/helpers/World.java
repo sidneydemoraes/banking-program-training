@@ -2,6 +2,8 @@ package helpers;
 
 import br.smc.banking.model.Account;
 import br.smc.banking.model.AccountType;
+import br.smc.banking.model.CheckingAccount;
+import br.smc.banking.model.SavingsAccount;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +21,26 @@ public class World {
 	private Account regularAccount;
 
 	@Getter
+	private CheckingAccount checkingAccount;
+
+	@Getter
+	private SavingsAccount savingsAccount;
+
+	@Getter
 	@Setter
 	private String thrownException;
+
+
+	public void setCheckingAccount(CheckingAccount account) {
+
+		this.checkingAccount = account;
+		this.regularAccount = account;
+	}
+
+	public void setSavingsAccount(SavingsAccount account) {
+
+		this.savingsAccount = account;
+		this.regularAccount = account;
+	}
 
 }

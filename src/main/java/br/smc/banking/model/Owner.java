@@ -4,7 +4,7 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Bean representing an {@link BaseAccount} owner.
+ * Bean representing an {@link Account} owner.
  *
  * Created by Sidney de Moraes.
  */
